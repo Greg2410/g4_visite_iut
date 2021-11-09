@@ -34,58 +34,49 @@
     <script src="js/three.min.js"></script>
     <script src="js/panolens.min.js"></script>
     <script>
-      var field = true;
-      const panorama = new PANOLENS.ImagePanorama( 'img/g4_couloir_prof_i4.jpg' );
-      const otherpic = new PANOLENS.ImagePanorama( 'img/g4_couloir_prof_i6.jpg');
+      var field = false;
+      const int_i4 = new PANOLENS.ImagePanorama( 'img/g4_int_i4.jpg' );
+      const couloir_prof_i4 = new PANOLENS.ImagePanorama( 'img/g4_couloir_prof_i4.jpg');
+      const couloir_i4 = new PANOLENS.ImagePanorama( 'img/g4_couloir_i4.jpg')
       const viewer = new PANOLENS.Viewer( { output: 'console' } );
 
-        const theta = Math.PI/6; // hauteur -pi/2 à pi/2
-        const phi = Math.PI; // placement sur le cercle à plat - pi à pi, 0 = derrière, pi et -pi devant
-        var rayon = panorama.radius;
+        const theta = Math.PI; // hauteur -pi/2 à pi/2
+        const phi = Math.PI/1.7; // placement sur le cercle à plat - pi à pi, 0 = derrière, pi et -pi devant
+        var rayon = int_i4.radius;
         console.log("Rayon : "+rayon);
         var position = new THREE.Vector3(
             rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
-            rayon * Math.sin(theta/2), // Attention Z de la sphère
-            rayon * Math.cos(theta) * Math.cos(phi*2) // Attention X de la sphère
+            rayon * Math.sin(theta), // Attention Z de la sphère
+            rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
         );
 
         var position2 = new THREE.Vector3(
-          rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
+          rayon * Math.cos(theta/7) * Math.sin(phi), // Attention Y sphère
           rayon * Math.sin(theta), // Attention Z de la sphère
-          rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
+          rayon * Math.cos(theta) * Math.cos(phi/1.2) // Attention X de la sphère
         );
 
+        //infospot couloir_prof_i4
         var taille = 300;
         var infospot = new PANOLENS.Infospot( taille * position.length() / rayon, PANOLENS.DataImage.Info );
         infospot.position.copy( position );
-//        infospot.addHoverText( 'Infospot1');
-        infospot.addEventListener( 'click', onFocus );
-        panorama.add( infospot );
+        infospot.addHoverText( 'couloir_prof_i4');
+        int_i4.add( infospot );
+        infospot.addEventListener( 'click', function(){ viewer.remove(int_i4);
+          viewer.add(couloir_prof_i4); viewer.setPanorama( couloir_prof_i4 ); });
+        
+        
+        //infospot couloir_i4
         var otherinfo = new PANOLENS.Infospot( taille * position.length() / rayon, PANOLENS.DataImage.Info );
         otherinfo.position.copy( position2 );
-//        otherinfo.addHoverText( 'Infospot1');
-        otherinfo.addEventListener( 'click', onFocus );
-        otherpic.add( otherinfo );
-      viewer.add( panorama );
+        otherinfo.addHoverText( 'couloir_i4');
+        otherinfo.addEventListener( 'click', function(){ viewer.remove(int_i4);
+          viewer.add(couloir_i4); viewer.setPanorama( couloir_i4 ); });
+        int_i4.add( otherinfo );
+      viewer.add( int_i4 );
       viewer.render.sortObjects = true;
       
-      function onFocus () {
 
-        console.log("Clic sur Infospot");
-        if(field) {
-          viewer.remove(panorama);
-          viewer.add(otherpic);
-          viewer.setPanorama(otherpic);
-        } else {
-          viewer.remove(otherpic);
-          viewer.add(panorama);
-          viewer.setPanorama(panorama);
-        }
-
-        field = ! field;
-
-
-    }
     </script>
 
   </body>
