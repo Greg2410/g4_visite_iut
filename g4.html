@@ -154,6 +154,7 @@
     //infospot couloir_prof_i4s
     var taille = 300;
     var infospot = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    viewer.getControl().rotateLeft(4.7);
     infospot.position.copy(position);
     infospot.addHoverText('couloir_prof_i4');
     int_i4.add(infospot);
@@ -177,6 +178,7 @@
       viewer.setPanorama(couloir_i4);
       //Gestion de l'angle de la camera
       viewer.getControl().rotateLeft(1.5);
+      otherinfo.addHoverText('');
     });
     int_i4.add(otherinfo);
     viewer.add(int_i4);
@@ -224,6 +226,7 @@
       viewer.remove(couloir_i4);
       viewer.add(int_i4);
       viewer.setPanorama(int_i4);
+      infospot.addHoverText('');
     });
 
     //infospot int_i4
@@ -236,6 +239,7 @@
       viewer.remove(couloir_prof_i4);
       viewer.add(int_i4);
       viewer.setPanorama(int_i4);
+      infospot.addHoverText('');
     });
 
     //infospot vers couloir_i6 à partir de int_i6
@@ -258,7 +262,7 @@
     var taille = 300;
     var coul_i6_to_i4 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
     coul_i6_to_i4.position.copy(position10);
-    coul_i6_to_i4.addHoverText('couloir_prof_i6');
+    coul_i6_to_i4.addHoverText('couloir_i4');
     couloir_i6.add(coul_i6_to_i4);
     coul_i6_to_i4.addEventListener('click', function () {
       viewer.remove(couloir_i6);
@@ -280,6 +284,7 @@
       viewer.remove(couloir_prof_i4);
       viewer.add(couloir_prof_i6);
       viewer.setPanorama(couloir_prof_i6);
+      infospot_coul_prof_i4_to_i6.addHoverText('');
     });
 
     //infospot couloir_prof_i4 to couloir_prof_i6
@@ -292,6 +297,7 @@
       viewer.remove(couloir_prof_i6);
       viewer.add(couloir_prof_i4);
       viewer.setPanorama(couloir_prof_i4);
+      infospot.addHoverText('');
     });
 
     //infospot couloir_prof_i6 to int_i6
@@ -304,6 +310,7 @@
       viewer.remove(couloir_prof_i6);
       viewer.add(int_i6);
       viewer.setPanorama(int_i6);
+      infospot.addHoverText('');
     });
 
     //infospot vers couloir_prof_i6 à partir de int_i6
