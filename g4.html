@@ -131,23 +131,23 @@
 
     //position couloir_prof_i6 to couloir_prof_i4
     var position12 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
+      rayon * Math.cos(-19*Math.PI/20) * Math.sin(10*Math.PI/19), // Attention Y sphère
+      rayon * Math.sin(-19*Math.PI/20), // Attention Z de la sphère
+      rayon * Math.cos(-19*Math.PI/20) * Math.cos(10*Math.PI/19) // Attention X de la sphère
     );
 
     //position couloir_prof_i6 to int_i6
     var position13 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
+      rayon * Math.cos(theta) * Math.sin(Math.PI), // Attention Y sphère
       rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
+      rayon * Math.cos(theta) * Math.cos(Math.PI) // Attention X de la sphère
     );
 
     //position couloir_prof_i6 to int_i6
     var position14 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
+      rayon * Math.cos(theta) * Math.sin(-2*Math.PI/5), // Attention Y sphère
       rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
+      rayon * Math.cos(theta) * Math.cos(-2*Math.PI/5) // Attention X de la sphère
     );
 
 
@@ -185,7 +185,6 @@
       otherinfo.addHoverText('');
     });
     int_i4.add(otherinfo);
-    viewer.add(int_i4);
 
     //infospot couloir_i6
     var taille = 300;
@@ -217,7 +216,6 @@
       //Gestion de l'angle de la camera
       viewer.getControl().rotateLeft(1.7);
     });
-    viewer.render.sortObjects = true;
 
 
     //infospot int_i4
@@ -276,7 +274,6 @@
       //Gestion de l'angle de la camera
       viewer.getControl().rotateLeft(1.5);
     });
-    viewer.render.sortObjects = true;
 
     //infospot couloir_prof_i4 to couloir_prof_i6
     var taille = 300;
@@ -332,6 +329,8 @@
       viewer.getControl().rotateLeft(4);
     });
 
+    viewer.add(couloir_prof_i6);
+    viewer.render.sortObjects = true;
   </script>
 
 </body>
