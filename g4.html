@@ -37,299 +37,329 @@
 
   <script src="js/three.min.js"></script>
   <script src="js/panolens.min.js"></script>
+  <script src="main.js"></script>
   <script>
     var field = false;
-    const int_i4 = new PANOLENS.ImagePanorama('img/g4_int_i4.jpg');
-    const int_i6 = new PANOLENS.ImagePanorama('img/g4_int_i6.jpg');
-    const couloir_prof_i4 = new PANOLENS.ImagePanorama('img/g4_couloir_prof_i4.jpg');
-    const couloir_prof_i6 = new PANOLENS.ImagePanorama('img/g4_couloir_prof_i6.jpg');
-    const couloir_i4 = new PANOLENS.ImagePanorama('img/g4_couloir_i4.jpg');
-    const couloir_i6 = new PANOLENS.ImagePanorama('img/g4_couloir_i6.jpg')
+    // const int_i4 = new PANOLENS.ImagePanorama('img/g4_int_i4.jpg');
+    // const int_i6 = new PANOLENS.ImagePanorama('img/g4_int_i6.jpg');
+    // const couloir_prof_i4 = new PANOLENS.ImagePanorama('img/g4_couloir_prof_i4.jpg');
+    // const couloir_prof_i6 = new PANOLENS.ImagePanorama('img/g4_couloir_prof_i6.jpg');
+    // const couloir_i4 = new PANOLENS.ImagePanorama('img/g4_couloir_i4.jpg');
+    // const couloir_i6 = new PANOLENS.ImagePanorama('img/g4_couloir_i6.jpg')
     const viewer = new PANOLENS.Viewer({ output: 'console' });
 
     const theta = Math.PI; // hauteur -pi/2 à pi/2
     const phi = Math.PI / 2; // placement sur le cercle à plat - pi à pi, 0 = derrière, pi et -pi devant
-    var rayon = int_i4.radius;
     console.log("Rayon : " + rayon + " phi " + phi + " theta " + theta);
 
-    //position infospot couloir_prof_i4
-    var position = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi+Math.PI/8), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi+Math.PI/8) // Attention X de la sphère
-    );
+    // //position infospot couloir_prof_i4
+    // var position = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(phi+Math.PI/8), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(phi+Math.PI/8) // Attention X de la sphère
+    // );
 
-    //position infospot couloir_i4
-    var position2 = new THREE.Vector3(
-      rayon * Math.cos(0) * Math.sin(phi), // Attention Y sphère
-      rayon * Math.sin(0), // Attention Z de la sphère
-      rayon * Math.cos(0) * Math.cos(phi) // Attention X de la sphèrec
-    );
+    // //position infospot couloir_i4
+    // var position2 = new THREE.Vector3(
+    //   rayon * Math.cos(0) * Math.sin(phi), // Attention Y sphère
+    //   rayon * Math.sin(0), // Attention Z de la sphère
+    //   rayon * Math.cos(0) * Math.cos(phi) // Attention X de la sphère
+    // );
 
-    //position infospot couloir_i6
-    var position3 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
-    );
+    // //position infospot couloir_i6
+    // var position3 = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
+    // );
 
-    //position infospot int_i6
-    var position4 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi*2), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi*2) // Attention X de la sphère
-    );
+    // //position infospot int_i6
+    // var position4 = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(phi*2), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(phi*2) // Attention X de la sphère
+    // );
 
-    //position infospot couloir_i6
-    var position5 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi+Math.PI/2), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi+Math.PI/2) // Attention X de la sphère
-    );
+    // //position infospot couloir_i6
+    // var position5 = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(phi+Math.PI/2), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(phi+Math.PI/2) // Attention X de la sphère
+    // );
 
-    //position infospot couloir_i6
-    var position6 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
-    );
+    // //position infospot couloir_i6
+    // var position6 = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
+    // );
 
-    //position infospot go_coul_to_prof_i6
-    var position7 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
-    );
+    // //position infospot go_coul_to_prof_i6
+    // var position7 = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
+    // );
 
-    //position infospot go_coul_i6
-    var position8 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
-    );
+    // //position infospot go_coul_i6
+    // var position8 = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
+    // );
 
-    //position infospot go_coul_i6
-    var position9 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
-    );
+    // //position infospot go_coul_i6
+    // var position9 = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(phi), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(phi) // Attention X de la sphère
+    // );
 
-    //position couloir_i6_to_couloir_i4
-    var position10 = new THREE.Vector3(
-      rayon * Math.cos(-14*theta/15) * Math.sin(phi+Math.PI), // Attention Y sphère
-      rayon * Math.sin(-14*theta/15), // Attention Z de la sphère
-      rayon * Math.cos(-14*theta/15) * Math.cos(phi+Math.PI) // Attention X de la sphère
-    );
+    // //position couloir_i6_to_couloir_i4
+    // var position10 = new THREE.Vector3(
+    //   rayon * Math.cos(-14*theta/15) * Math.sin(phi+Math.PI), // Attention Y sphère
+    //   rayon * Math.sin(-14*theta/15), // Attention Z de la sphère
+    //   rayon * Math.cos(-14*theta/15) * Math.cos(phi+Math.PI) // Attention X de la sphère
+    // );
 
-    //position couloir_prof_i4 to couloir_prof_i6
-    var position11 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(phi-Math.PI), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi-Math.PI) // Attention X de la sphère
-    );
+    // //position couloir_prof_i4 to couloir_prof_i6
+    // var position11 = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(phi-Math.PI), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(phi-Math.PI) // Attention X de la sphère
+    // );
 
-    //position couloir_prof_i6 to couloir_prof_i4
-    var position12 = new THREE.Vector3(
-      rayon * Math.cos(-19*Math.PI/20) * Math.sin(10*Math.PI/19), // Attention Y sphère
-      rayon * Math.sin(-19*Math.PI/20), // Attention Z de la sphère
-      rayon * Math.cos(-19*Math.PI/20) * Math.cos(10*Math.PI/19) // Attention X de la sphère
-    );
+    // //position couloir_prof_i6 to couloir_prof_i4
+    // var position12 = new THREE.Vector3(
+    //   rayon * Math.cos(-19*Math.PI/20) * Math.sin(10*Math.PI/19), // Attention Y sphère
+    //   rayon * Math.sin(-19*Math.PI/20), // Attention Z de la sphère
+    //   rayon * Math.cos(-19*Math.PI/20) * Math.cos(10*Math.PI/19) // Attention X de la sphère
+    // );
 
-    //position couloir_prof_i6 to int_i6
-    var position13 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(Math.PI), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(Math.PI) // Attention X de la sphère
-    );
+    // //position couloir_prof_i6 to int_i6
+    // var position13 = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(Math.PI), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(Math.PI) // Attention X de la sphère
+    // );
 
-    //position couloir_prof_i6 to int_i6
-    var position14 = new THREE.Vector3(
-      rayon * Math.cos(theta) * Math.sin(-2*Math.PI/5), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(-2*Math.PI/5) // Attention X de la sphère
-    );
+    // //position couloir_prof_i6 to int_i6
+    // var position14 = new THREE.Vector3(
+    //   rayon * Math.cos(theta) * Math.sin(-2*Math.PI/5), // Attention Y sphère
+    //   rayon * Math.sin(theta), // Attention Z de la sphère
+    //   rayon * Math.cos(theta) * Math.cos(-2*Math.PI/5) // Attention X de la sphère
+    // );
+    const taille = 300;
+
+    //création des infospots de l'image img 
+    function CreateInfospot(img){
+      let tableau = tableauImages.find(item=>item.nom === img);
+      tableau.infospot.forEach(item=>{
+        console.log(item);
+        let ImageDestination = tableauImages.find(unit=>unit.nom === item.destination);
+        var infospot = new PANOLENS.Infospot(taille * item.position.length() / rayon, PANOLENS.DataImage.Info);
+        infospot.position.copy(item.position);
+        infospot.addHoverText(item.text);
+        tableau.pano.add(infospot);
+        infospot.addEventListener('click', function () {
+          viewer.remove(tableau.pano);
+          CreateInfospot(item.destination)
+          viewer.add(ImageDestination.pano);
+          viewer.setPanorama(ImageDestination.pano);
+          //Gestion de l'angle de la camera
+          viewer.camera.position.set(
+            rayon * Math.cos(item.theta) * Math.sin(item.phi), // Attention Y sphère
+            rayon * Math.sin(item.theta), // Attention Z de la sphère
+            rayon * Math.cos(item.theta) * Math.cos(item.phi), // Attention X de la sphère););
+          );
+          infospot.addHoverText('');
+        })
+      console.log(tableau);
+      });
+    }
+
+    // //infospot couloir_prof_i4
+    // var taille = 300;
+    // var infospot = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // infospot.position.copy(position);
+    // infospot.addHoverText('couloir_prof_i4');
+    // int_i4.add(infospot);
+    // infospot.addEventListener('click', function () {
+    //   viewer.remove(int_i4);
+    //   viewer.add(couloir_prof_i4);
+    //   viewer.setPanorama(couloir_prof_i4);
+    //   //Gestion de l'angle de la camera
+    //   viewer.getControl().rotateLeft(4.7);
+    //   infospot.addHoverText('');
+    // });
 
 
-    //infospot couloir_prof_i4
-    var taille = 300;
-    var infospot = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // //infospot couloir_i4
+    // var otherinfo = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // otherinfo.position.copy(position2);
+    // otherinfo.addHoverText('couloir_i4');
+    // otherinfo.addEventListener('click', function () {
+    //   viewer.remove(int_i4);
+    //   viewer.add(couloir_i4);
+    //   viewer.setPanorama(couloir_i4);
+    //   //Gestion de l'angle de la camera
+    //   viewer.getControl().rotateLeft(1.5);
+    //   otherinfo.addHoverText('');
+    // });
+    // int_i4.add(otherinfo);
+
+    // //infospot couloir_i6
+    // var taille = 300;
+    // var infospot_coul_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // infospot_coul_i6.position.copy(position3);
+    // infospot_coul_i6.addHoverText('couloir_i6');
+    // couloir_i4.add(infospot_coul_i6);
+    // infospot_coul_i6.addEventListener('click', function () {
+    //   viewer.remove(couloir_i4);
+    //   viewer.add(couloir_i6);
+    //   viewer.setPanorama(couloir_i6);
+    //   infospot_coul_i6.addHoverText('');
+    //   //Gestion de l'angle de la camera
+    //   viewer.getControl().rotateLeft(0);
+
+    // });
+
+    // //infospot int_i6
+    // var taille = 300;
+    // var infospot_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // infospot_i6.position.copy(position4);
+    // infospot_i6.addHoverText('int_i6');
+    // couloir_i6.add(infospot_i6);
+    // infospot_i6.addEventListener('click', function () {
+    //   viewer.remove(couloir_i6);
+    //   viewer.add(int_i6);
+    //   viewer.setPanorama(int_i6);
+    //   infospot_i6.addHoverText('');
+    //   //Gestion de l'angle de la camera
+    //   viewer.getControl().rotateLeft(1.7);
+    // });
+
+
+    // //infospot int_i4
+    // var taille = 300;
+    // var infospot_i4 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // infospot_i4.position.copy(position5);
+    // infospot_i4.addHoverText('int_i4');
+    // couloir_i4.add(infospot_i4);
+    // infospot_i4.addEventListener('click', function () {
+    //   viewer.remove(couloir_i4);
+    //   viewer.add(int_i4);
+    //   viewer.setPanorama(int_i4);
+    //   infospot.addHoverText('');
+    // });
+
+    // //infospot int_i4
+    // var taille = 300;
+    // var infospot_coul_prof_i4 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // infospot_coul_prof_i4.position.copy(position6);
+    // infospot_coul_prof_i4.addHoverText('couloir_to_int_i4');
+    // couloir_prof_i4.add(infospot_coul_prof_i4);
+    // infospot_coul_prof_i4.addEventListener('click', function () {
+    //   viewer.remove(couloir_prof_i4);
+    //   viewer.add(int_i4);
+    //   viewer.setPanorama(int_i4);
+    //   infospot.addHoverText('');
+    // });
+
+    // //infospot vers couloir_i6 à partir de int_i6
+    // var taille = 300;
+    // var go_coul_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // go_coul_i6.position.copy(position8);
+    // go_coul_i6.addHoverText('couloir_i6');
+    // int_i6.add(go_coul_i6);
+    // go_coul_i6.addEventListener('click', function () {
+    //   viewer.remove(int_i6);
+    //   viewer.add(couloir_i6);
+    //   viewer.setPanorama(couloir_i6);
+    //   go_coul_i6.addHoverText('');
+    //   //Gestion de l'angle de la camera
+    //   viewer.getControl().rotateLeft(4);
+    // });
+
+
+    // //infospot vers couloir_prof_i6 à partir de int_i6
+    // var taille = 300;
+    // var coul_i6_to_i4 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // coul_i6_to_i4.position.copy(position10);
+    // coul_i6_to_i4.addHoverText('couloir_i4');
+    // couloir_i6.add(coul_i6_to_i4);
+    // coul_i6_to_i4.addEventListener('click', function () {
+    //   viewer.remove(couloir_i6);
+    //   viewer.add(couloir_i4);
+    //   viewer.setPanorama(couloir_i4);
+    //   coul_i6_to_i4.addHoverText('');
+    //   //Gestion de l'angle de la camera
+    //   viewer.getControl().rotateLeft(1.5);
+    // });
+
+    // //infospot couloir_prof_i4 to couloir_prof_i6
+    // var taille = 300;
+    // var infospot_coul_prof_i4_to_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // infospot_coul_prof_i4_to_i6.position.copy(position11);
+    // infospot_coul_prof_i4_to_i6.addHoverText('couloir_prof_i6');
+    // couloir_prof_i4.add(infospot_coul_prof_i4_to_i6);
+    // infospot_coul_prof_i4_to_i6.addEventListener('click', function () {
+    //   viewer.remove(couloir_prof_i4);
+    //   viewer.add(couloir_prof_i6);
+    //   viewer.setPanorama(couloir_prof_i6);
+    //   infospot_coul_prof_i4_to_i6.addHoverText('');
+    // });
+
+    // //infospot couloir_prof_i4 to couloir_prof_i6
+    // var taille = 300;
+    // var infospot_coul_prof_i6_to_i4 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // infospot_coul_prof_i6_to_i4.position.copy(position12);
+    // infospot_coul_prof_i6_to_i4.addHoverText('couloir_prof_i4');
+    // couloir_prof_i6.add(infospot_coul_prof_i6_to_i4);
+    // infospot_coul_prof_i6_to_i4.addEventListener('click', function () {
+    //   viewer.remove(couloir_prof_i6);
+    //   viewer.add(couloir_prof_i4);
+    //   viewer.setPanorama(couloir_prof_i4);
+    //   infospot.addHoverText('');
+    // });
+
+    // //infospot couloir_prof_i6 to int_i6
+    // var taille = 300;
+    // var infospot_coul_prof_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // infospot_coul_prof_i6.position.copy(position13);
+    // infospot_coul_prof_i6.addHoverText('couloir_to_int_i6');
+    // couloir_prof_i6.add(infospot_coul_prof_i6);
+    // infospot_coul_prof_i6.addEventListener('click', function () {
+    //   viewer.remove(couloir_prof_i6);
+    //   viewer.add(int_i6);
+    //   viewer.setPanorama(int_i6);
+    //   infospot.addHoverText('');
+    // });
+
+    // //infospot vers couloir_prof_i6 à partir de int_i6
+    // var taille = 300;
+    // var go_coul_prof_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
+    // go_coul_prof_i6.position.copy(position14);
+    // go_coul_prof_i6.addHoverText('couloir_prof_i6');
+    // int_i6.add(go_coul_prof_i6);
+    // go_coul_prof_i6.addEventListener('click', function () {
+    //   viewer.remove(int_i6);
+    //   viewer.add(couloir_prof_i6);
+    //   viewer.setPanorama(couloir_prof_i6);
+    //   go_coul_prof_i6.addHoverText('');
+    //   //Gestion de l'angle de la camera
+    //   viewer.getControl().rotateLeft(4);
+    // });
+
     viewer.camera.position.set(
       rayon * Math.cos(theta) * Math.sin(phi-Math.PI), // Attention Y sphère
       rayon * Math.sin(theta), // Attention Z de la sphère
       rayon * Math.cos(theta) * Math.cos(phi-Math.PI), // Attention X de la sphère);
-    )
-    infospot.position.copy(position);
-    infospot.addHoverText('couloir_prof_i4');
-    int_i4.add(infospot);
-    infospot.addEventListener('click', function () {
-      viewer.remove(int_i4);
-      viewer.add(couloir_prof_i4);
-      viewer.setPanorama(couloir_prof_i4);
-      //Gestion de l'angle de la camera
-      viewer.getControl().rotateLeft(4.7);
-      infospot.addHoverText('');
-    });
+    );
 
+    CreateInfospot('g4_int_i4');
 
-    //infospot couloir_i4
-    var otherinfo = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    otherinfo.position.copy(position2);
-    otherinfo.addHoverText('couloir_i4');
-    otherinfo.addEventListener('click', function () {
-      viewer.remove(int_i4);
-      viewer.add(couloir_i4);
-      viewer.setPanorama(couloir_i4);
-      //Gestion de l'angle de la camera
-      viewer.getControl().rotateLeft(1.5);
-      otherinfo.addHoverText('');
-    });
-    int_i4.add(otherinfo);
-
-    //infospot couloir_i6
-    var taille = 300;
-    var infospot_coul_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    infospot_coul_i6.position.copy(position3);
-    infospot_coul_i6.addHoverText('couloir_i6');
-    couloir_i4.add(infospot_coul_i6);
-    infospot_coul_i6.addEventListener('click', function () {
-      viewer.remove(couloir_i4);
-      viewer.add(couloir_i6);
-      viewer.setPanorama(couloir_i6);
-      infospot_coul_i6.addHoverText('');
-      //Gestion de l'angle de la camera
-      viewer.getControl().rotateLeft(0);
-
-    });
-
-    //infospot int_i6
-    var taille = 300;
-    var infospot_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    infospot_i6.position.copy(position4);
-    infospot_i6.addHoverText('int_i6');
-    couloir_i6.add(infospot_i6);
-    infospot_i6.addEventListener('click', function () {
-      viewer.remove(couloir_i6);
-      viewer.add(int_i6);
-      viewer.setPanorama(int_i6);
-      infospot_i6.addHoverText('');
-      //Gestion de l'angle de la camera
-      viewer.getControl().rotateLeft(1.7);
-    });
-
-
-    //infospot int_i4
-    var taille = 300;
-    var infospot_i4 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    infospot_i4.position.copy(position5);
-    infospot_i4.addHoverText('int_i4');
-    couloir_i4.add(infospot_i4);
-    infospot_i4.addEventListener('click', function () {
-      viewer.remove(couloir_i4);
-      viewer.add(int_i4);
-      viewer.setPanorama(int_i4);
-      infospot.addHoverText('');
-    });
-
-    //infospot int_i4
-    var taille = 300;
-    var infospot_coul_prof_i4 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    infospot_coul_prof_i4.position.copy(position6);
-    infospot_coul_prof_i4.addHoverText('couloir_to_int_i4');
-    couloir_prof_i4.add(infospot_coul_prof_i4);
-    infospot_coul_prof_i4.addEventListener('click', function () {
-      viewer.remove(couloir_prof_i4);
-      viewer.add(int_i4);
-      viewer.setPanorama(int_i4);
-      infospot.addHoverText('');
-    });
-
-    //infospot vers couloir_i6 à partir de int_i6
-    var taille = 300;
-    var go_coul_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    go_coul_i6.position.copy(position8);
-    go_coul_i6.addHoverText('couloir_i6');
-    int_i6.add(go_coul_i6);
-    go_coul_i6.addEventListener('click', function () {
-      viewer.remove(int_i6);
-      viewer.add(couloir_i6);
-      viewer.setPanorama(couloir_i6);
-      go_coul_i6.addHoverText('');
-      //Gestion de l'angle de la camera
-      viewer.getControl().rotateLeft(4);
-    });
-
-
-    //infospot vers couloir_prof_i6 à partir de int_i6
-    var taille = 300;
-    var coul_i6_to_i4 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    coul_i6_to_i4.position.copy(position10);
-    coul_i6_to_i4.addHoverText('couloir_i4');
-    couloir_i6.add(coul_i6_to_i4);
-    coul_i6_to_i4.addEventListener('click', function () {
-      viewer.remove(couloir_i6);
-      viewer.add(couloir_i4);
-      viewer.setPanorama(couloir_i4);
-      coul_i6_to_i4.addHoverText('');
-      //Gestion de l'angle de la camera
-      viewer.getControl().rotateLeft(1.5);
-    });
-
-    //infospot couloir_prof_i4 to couloir_prof_i6
-    var taille = 300;
-    var infospot_coul_prof_i4_to_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    infospot_coul_prof_i4_to_i6.position.copy(position11);
-    infospot_coul_prof_i4_to_i6.addHoverText('couloir_prof_i6');
-    couloir_prof_i4.add(infospot_coul_prof_i4_to_i6);
-    infospot_coul_prof_i4_to_i6.addEventListener('click', function () {
-      viewer.remove(couloir_prof_i4);
-      viewer.add(couloir_prof_i6);
-      viewer.setPanorama(couloir_prof_i6);
-      infospot_coul_prof_i4_to_i6.addHoverText('');
-    });
-
-    //infospot couloir_prof_i4 to couloir_prof_i6
-    var taille = 300;
-    var infospot_coul_prof_i6_to_i4 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    infospot_coul_prof_i6_to_i4.position.copy(position12);
-    infospot_coul_prof_i6_to_i4.addHoverText('couloir_prof_i4');
-    couloir_prof_i6.add(infospot_coul_prof_i6_to_i4);
-    infospot_coul_prof_i6_to_i4.addEventListener('click', function () {
-      viewer.remove(couloir_prof_i6);
-      viewer.add(couloir_prof_i4);
-      viewer.setPanorama(couloir_prof_i4);
-      infospot.addHoverText('');
-    });
-
-    //infospot couloir_prof_i6 to int_i6
-    var taille = 300;
-    var infospot_coul_prof_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    infospot_coul_prof_i6.position.copy(position13);
-    infospot_coul_prof_i6.addHoverText('couloir_to_int_i6');
-    couloir_prof_i6.add(infospot_coul_prof_i6);
-    infospot_coul_prof_i6.addEventListener('click', function () {
-      viewer.remove(couloir_prof_i6);
-      viewer.add(int_i6);
-      viewer.setPanorama(int_i6);
-      infospot.addHoverText('');
-    });
-
-    //infospot vers couloir_prof_i6 à partir de int_i6
-    var taille = 300;
-    var go_coul_prof_i6 = new PANOLENS.Infospot(taille * position.length() / rayon, PANOLENS.DataImage.Info);
-    go_coul_prof_i6.position.copy(position14);
-    go_coul_prof_i6.addHoverText('couloir_prof_i6');
-    int_i6.add(go_coul_prof_i6);
-    go_coul_prof_i6.addEventListener('click', function () {
-      viewer.remove(int_i6);
-      viewer.add(couloir_prof_i6);
-      viewer.setPanorama(couloir_prof_i6);
-      go_coul_prof_i6.addHoverText('');
-      //Gestion de l'angle de la camera
-      viewer.getControl().rotateLeft(4);
-    });
-
-    viewer.add(couloir_prof_i6);
+    viewer.add(tableauImages[0].pano);
     viewer.render.sortObjects = true;
   </script>
 
