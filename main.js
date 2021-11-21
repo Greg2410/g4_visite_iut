@@ -71,7 +71,7 @@ const tableauImages = [
     'nom': 'g4_couloir_i4',
       'infospot': [
         {
-          'phi' : Math.PI / 2,
+          'phi' : Math.PI,
           'theta': Math.PI,     
           'position' : new THREE.Vector3(
             rayon * Math.cos(Math.PI) * Math.sin(Math.PI / 2 + Math.PI/2), // Attention Y sphère
@@ -101,7 +101,7 @@ const tableauImages = [
             rayon * Math.cos(-14*Math.PI/15) * Math.cos(-Math.PI/6) // Attention X de la sphère
           ),
           'text': 'extérieur i4 depuis couloir i4',
-          'destination': 'g4_couloir_i4'
+          'destination': 'g3_ext_i4'
         } 
       ]
   },
@@ -140,7 +140,7 @@ const tableauImages = [
             rayon * Math.cos(-19*Math.PI/20) * Math.cos(Math.PI / 2) // Attention X de la sphère
           ),
           'text': 'couloir élève dbe depuis couloir élève i6',
-          'destination': 'g4_couloir_i6'
+          'destination': 'g3_couloir_bde'
         },
         { 
           'phi' : 0,
@@ -231,7 +231,7 @@ const tableauImages = [
             rayon * Math.cos(Math.PI) * Math.cos(3*Math.PI/2) // Attention X de la sphère
           ),
           'text': 'couloir prof escalier depuis couloir prof i6',
-          'destination': 'g4_couloir_prof_i6'
+          'destination': 'g2_couloir_prof_escalier'
         } 
       ]
   },
