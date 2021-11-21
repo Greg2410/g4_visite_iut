@@ -184,14 +184,14 @@ const tableauImages = [
         },
         { 
           'phi' : Math.PI,
-          'theta': Math.PI,   
+          'theta': 0,   
           'position' : new THREE.Vector3(
             rayon * Math.cos(Math.PI) * Math.sin(Math.PI / 2), // Attention Y sphère
             rayon * Math.sin(Math.PI), // Attention Z de la sphère
             rayon * Math.cos(Math.PI) * Math.cos(Math.PI / 2) // Attention X de la sphère
           ),
-          'text': 'parking prof depuis couloir prof i4',
-          'destination': 'g4_couloir_prof_i4'
+          'text': 'accueil depuis couloir prof i4',
+          'destination': 'g1_couloir_prof_accueil'
         } 
       ]
   },

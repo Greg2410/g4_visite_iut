@@ -162,17 +162,27 @@
         infospot.addHoverText(item.text);
         tableau.pano.add(infospot);
         infospot.addEventListener('click', function () {
-          viewer.remove(tableau.pano);
-          CreateInfospot(item.destination)
-          viewer.add(ImageDestination.pano);
-          viewer.setPanorama(ImageDestination.pano);
-          //Gestion de l'angle de la camera
-          viewer.camera.position.set(
-            rayon * Math.cos(item.theta) * Math.sin(item.phi), // Attention Y sphère
-            rayon * Math.sin(item.theta), // Attention Z de la sphère
-            rayon * Math.cos(item.theta) * Math.cos(item.phi), // Attention X de la sphère););
-          );
-          infospot.addHoverText('');
+          let grp =item.destination.split("_")[0];//code by Yoann
+          if(grp == "g4"){
+            viewer.remove(tableau.pano);
+            CreateInfospot(item.destination)
+            viewer.add(ImageDestination.pano);
+            viewer.setPanorama(ImageDestination.pano);
+            //Gestion de l'angle de la camera
+            viewer.camera.position.set(
+              rayon * Math.cos(item.theta) * Math.sin(item.phi), // Attention Y sphère
+              rayon * Math.sin(item.theta), // Attention Z de la sphère
+              rayon * Math.cos(item.theta) * Math.cos(item.phi), // Attention X de la sphère););
+            );
+            infospot.addHoverText('');
+          }else{ 
+            // start code by Yoann
+            location.href = grp+".html?nom="+item.destination
+            +"&phi="+item.phi
+            +"&theta="+item.theta;
+            // end code by Yoann
+          }
+          
         })
       console.log(tableau);
       });
@@ -351,16 +361,43 @@
     //   viewer.getControl().rotateLeft(4);
     // });
 
-    viewer.camera.position.set(
-      rayon * Math.cos(theta) * Math.sin(phi-Math.PI), // Attention Y sphère
-      rayon * Math.sin(theta), // Attention Z de la sphère
-      rayon * Math.cos(theta) * Math.cos(phi-Math.PI), // Attention X de la sphère);
-    );
+    // start code by Yoann
+    
+    
+    var url = new URL (window.location.href);
+    // recuperation des paramètres url
+    var nom_url = url.searchParams.get('nom');
+    var phi_url = url.searchParams.get('phi');
+    var theta_url = url.searchParams.get('theta');
 
-    CreateInfospot('g4_int_i4');
+    if(tableauImages.filter(dataImg => (dataImg.nom === nom_url)).length > 0 
+    && !isNaN(phi_url) && !isNaN(theta_url)) {
+      let Image = tableauImages.find(unit=>unit.nom === nom_url);
 
-    viewer.add(tableauImages[0].pano);
-    viewer.render.sortObjects = true;
+      viewer.camera.position.set(
+        rayon * Math.cos(theta_url) * Math.sin(phi_url), // Attention Y sphère
+        rayon * Math.sin(theta_url), // Attention Z de la sphère
+        rayon * Math.cos(theta_url) * Math.cos(phi_url), // Attention X de la sphère);
+      );
+
+      CreateInfospot(Image.nom);
+
+      viewer.add(Image.pano);
+      viewer.render.sortObjects = true;
+    } else {//end code by Yoann
+      viewer.camera.position.set(
+        rayon * Math.cos(theta) * Math.sin(phi-Math.PI), // Attention Y sphère
+        rayon * Math.sin(theta), // Attention Z de la sphère
+        rayon * Math.cos(theta) * Math.cos(phi-Math.PI), // Attention X de la sphère);
+      );
+
+      CreateInfospot(tableauImages[0].nom);
+
+      viewer.add(tableauImages[0].pano);
+      viewer.render.sortObjects = true;
+    }
+
+    
   </script>
 
 </body>
